@@ -1,0 +1,65 @@
+﻿@model MVCValidations.Models.Student 
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @using (Html.BeginForm("SubmitData", "Home", FormMethod.Post)) 
+    { 
+        <h1>Registration Form</h1>
+        <table cellpadding="2" cellspacing="2" border="0">
+
+            <tr>
+                <td>First Name</td>
+                <td>@Html.TextBoxFor(model => model.FirstName)</td>
+                <td>@Html.ValidationMessageFor(model => model.FirstName)</td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>@Html.TextBoxFor(model => model.LastName)</td>
+                <td>@Html.ValidationMessageFor(model => model.LastName)</td>
+            </tr>
+            <tr>
+                <td>Date Of Birth</td>
+                <td>@Html.TextBoxFor(model => model.DateOfBirth)</td>
+                <td>@Html.ValidationMessageFor(model => model.DateOfBirth)</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>@Html.TextAreaFor(model => model.Address)</td>
+                <td>@Html.ValidationMessageFor(model => model.Address)</td>
+            </tr>
+            <tr>
+                <td>Contact No</td>
+                <td>@Html.TextBoxFor(model => model.ContactNo)</td>
+                <td>@Html.ValidationMessageFor(model => model.ContactNo)</td>
+            </tr>
+            <tr>
+                <td>Email Id</td>
+                <td>@Html.TextBoxFor(model => model.Email)</td>
+                <td>@Html.ValidationMessageFor(model => model.Email)</td>
+            </tr>
+            <tr>
+                <td>Confirm Email Id</td>
+                <td>@Html.TextBoxFor(model => model.ConfirmEmail)</td>
+                <td>@Html.ValidationMessageFor(model => model.ConfirmEmail)</td>
+            </tr>
+            <tr>
+                <td>Age</td>
+                <td>@Html.EditorFor(model => model.Age)</td>
+                <td>@Html.ValidationMessageFor(model => model.Age)</td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Save"></td>
+            </tr>
+        </table>
+    }
+</body>
+</html>
