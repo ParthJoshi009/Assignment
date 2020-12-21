@@ -1,0 +1,73 @@
+﻿@model RegistrationAndLogin.Models.UserLogin
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<style type="text/css">
+    .error{
+        color: red;
+     
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        ClientValidation();
+    });
+    function ClientValidation() {
+        $("#frmLogin").validate({
+            rules: {
+                'Email': {
+                    required: true,
+                    email: true
+                },
+                'Password': {
+                    required: true,
+                    minlength: 6
+                }
+            },
+            messages: {
+                'Email': {
+                    required: 'EmailId Is Required',
+                    email: 'Enter Valid Email'
+                },
+                'Password': {
+                    required: 'Password Is Required',
+                    minlength: 'Minimum length of password is 6'
+                }
+            }
+        })
+    }
+</script>
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id = "frmLogin" }))
+{
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
+    @Html.ValidationSummary();
+<div class="row justify-content-md-center">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                Login
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "badge badge-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge badge-danger" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="submit" class="btn btn-primary" value="Login" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
