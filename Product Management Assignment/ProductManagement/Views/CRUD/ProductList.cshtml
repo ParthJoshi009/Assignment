@@ -1,0 +1,103 @@
+﻿@model IPagedList<ProductManagement.tblProduct>
+@{
+    ViewBag.Title = "ProductList";
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+
+<div style="margin-left:470px;">
+    @using (Html.BeginForm("Search", "CRUD", FormMethod.Get))
+    {
+        <span>Enter Product Name:</span>
+        <input type="text" name="search" placeholder="Enter Product Name" />
+        <input type="submit" name="submit" value="Search" class="btn btn-primary" />
+        <br />
+    }
+</div>
+
+@using (Html.BeginForm("ProductList", "CRUD", FormMethod.Post))
+{
+    <button style="margin-left:600px;" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> DeleteSelectedRow(s)</button>
+    <table class="table table-striped" align="center">
+        <tr>
+            <th>
+                <input type="checkbox" id="checkBoxAll" />
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().SmallImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ShortDescription)
+            </th>
+            <th>
+                Actions
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            <input type="checkbox" class="chkCheckBoxID" value="@item.Id" name="prdids" />
+        </td>
+        <td>
+            <img src="@Url.Content(item.SmallImage)" alt="Not Found" width="30" height="30" />
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShortDescription)
+        </td>
+
+        <td>
+            <a href="@Url.Action("Edit", "CRUD", new { id = item.Id })" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+            <a href="@Url.Action("Delete", "CRUD", new { id = item.Id })" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
+        </td>
+    </tr>
+        }
+
+    </table>
+
+@Html.PagedListPager(Model,i=>Url.Action("ProductList","CRUD",new { i}))
+
+}
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+    </script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/")jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#checkBoxAll').click(function () {
+                if ($(this).is(":checked"))
+                    $('.chkCheckBoxID').prop('checked', true);
+                else
+                    $('.chkCheckBoxID').prop('checked', false);
+            });
+        });
+    </script>
+}

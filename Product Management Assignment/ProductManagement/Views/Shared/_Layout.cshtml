@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/themes/default.min.css" rel="stylesheet" />
+    <link href="https://bootswatch.com/flatly/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        
+
+body {
+  padding-top: 50px;
+}
+footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+media screen and (max-width: 768px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+    background:#ecf0f1;
+  }
+
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -40%;
+  }
+
+  .row-offcanvas-left.active {
+    left: 40%;
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 40%;
+    margin-left: 12px;
+  }
+}
+
+#sidebar {
+    padding:15px;
+    margin-top:10px;
+}
+    </style>
+
+</head>
+<body>
+
+    <div class="navbar navbar-fixed-top navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index","CRUD")">Product Management</a>
+                <a class="navbar-brand" href="#" style="margin-left:340px;">Welcome, @Session["Name"].ToString()</a>
+                <a class="navbar-brand"  href="@Url.Action("Logout","CRUD")" style="margin-left:500px;"><i class="fa fa-sign-out"></i> Logout</a>
+              </div>
+            <!-- /.nav-collapse -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.navbar -->
+
+    <div class="container-fluid">
+        <div class="row row-offcanvas row-offcanvas-left">
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                <div class="sidebar-nav">
+                    <ul class="nav">
+                        <li style="font-size:20px;"> @Html.ActionLink("Product List", "ProductList", "CRUD", new { area = "" }, null)</li>
+                        <li class="active" style="font-size:20px;"> @Html.ActionLink("Add Product", "AddProduct", "CRUD", new { area = "" }, null)</li>
+
+
+                    </ul>
+                </div>
+                <!--/.well -->
+            </div>
+            <!--/span-->
+
+            <div class="col-xs-12 col-sm-9">
+                <br>
+                <div class="jumbotron">
+                    @RenderBody()
+                 </div>
+            </div>
+        </div>
+    </div>
+    
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        <script src="~/Scripts/alertify.min.js"></script>
+        @RenderSection("scripts", required: false)
+</body>
+</html>
