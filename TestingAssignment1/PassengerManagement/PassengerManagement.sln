@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassengerManagement", "PassengerManagement.csproj", "{3C2DD399-048B-43CE-9B25-121772CB67F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPassenger", "..\TestPassenger\TestPassenger.csproj", "{47D6E22A-FC3C-4417-9BD5-E88BCC40A33A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C2DD399-048B-43CE-9B25-121772CB67F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C2DD399-048B-43CE-9B25-121772CB67F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C2DD399-048B-43CE-9B25-121772CB67F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C2DD399-048B-43CE-9B25-121772CB67F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47D6E22A-FC3C-4417-9BD5-E88BCC40A33A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47D6E22A-FC3C-4417-9BD5-E88BCC40A33A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47D6E22A-FC3C-4417-9BD5-E88BCC40A33A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47D6E22A-FC3C-4417-9BD5-E88BCC40A33A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A78089D9-C52D-4F4F-AA97-1D563ABC86CF}
+	EndGlobalSection
+EndGlobal
