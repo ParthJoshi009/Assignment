@@ -1,0 +1,13 @@
+C:\Users\win-10\source\repos\ExtensionTestDemo\bin\Debug\netcoreapp3.1\ExtensionTestDemo.exe
+C:\Users\win-10\source\repos\ExtensionTestDemo\bin\Debug\netcoreapp3.1\ExtensionTestDemo.deps.json
+C:\Users\win-10\source\repos\ExtensionTestDemo\bin\Debug\netcoreapp3.1\ExtensionTestDemo.runtimeconfig.json
+C:\Users\win-10\source\repos\ExtensionTestDemo\bin\Debug\netcoreapp3.1\ExtensionTestDemo.runtimeconfig.dev.json
+C:\Users\win-10\source\repos\ExtensionTestDemo\bin\Debug\netcoreapp3.1\ExtensionTestDemo.dll
+C:\Users\win-10\source\repos\ExtensionTestDemo\bin\Debug\netcoreapp3.1\ExtensionTestDemo.pdb
+C:\Users\win-10\source\repos\ExtensionTestDemo\obj\Debug\netcoreapp3.1\ExtensionTestDemo.AssemblyInfoInputs.cache
+C:\Users\win-10\source\repos\ExtensionTestDemo\obj\Debug\netcoreapp3.1\ExtensionTestDemo.AssemblyInfo.cs
+C:\Users\win-10\source\repos\ExtensionTestDemo\obj\Debug\netcoreapp3.1\ExtensionTestDemo.csproj.CoreCompileInputs.cache
+C:\Users\win-10\source\repos\ExtensionTestDemo\obj\Debug\netcoreapp3.1\ExtensionTestDemo.dll
+C:\Users\win-10\source\repos\ExtensionTestDemo\obj\Debug\netcoreapp3.1\ExtensionTestDemo.pdb
+C:\Users\win-10\source\repos\ExtensionTestDemo\obj\Debug\netcoreapp3.1\ExtensionTestDemo.genruntimeconfig.cache
+C:\Users\win-10\source\repos\ExtensionTestDemo\obj\Debug\netcoreapp3.1\ExtensionTestDemo.csprojAssemblyReference.cache
