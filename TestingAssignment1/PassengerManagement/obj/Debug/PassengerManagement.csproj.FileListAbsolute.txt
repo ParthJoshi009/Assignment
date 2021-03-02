@@ -1,2 +1,4 @@
 C:\Users\win-10\source\repos\PassengerManagement\obj\Debug\PassengerManagement.csprojAssemblyReference.cache
 C:\Users\win-10\source\repos\PassengerManagement\obj\Debug\PassengerManagement.csproj.CoreCompileInputs.cache
+C:\Users\win-10\Documents\GitHub\Assignment\TestingAssignment1\PassengerManagement\obj\Debug\PassengerManagement.csprojAssemblyReference.cache
+C:\Users\win-10\Documents\GitHub\Assignment\TestingAssignment1\PassengerManagement\obj\Debug\PassengerManagement.csproj.CoreCompileInputs.cache
