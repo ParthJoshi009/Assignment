@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace HotelmanagementWebapi.Controllers
 {
+    [AuthFilter]
     public class RoomController : ApiController
     {
         IRoom room;
@@ -16,6 +17,7 @@ namespace HotelmanagementWebapi.Controllers
             room = iroom;
         }
         [HttpGet]
+        [Route("Room/GetRooms")]
         public IHttpActionResult GetRooms(string city, string pincode, int price, string category)
         {
             try
@@ -29,36 +31,42 @@ namespace HotelmanagementWebapi.Controllers
             }
         }
         [HttpGet]
+        [Route("Room/CheckRoomAvailability")]
         public IHttpActionResult CheckRoomAvailability(int roomid, DateTime date)
         {
             var result = room.CheckRoomAvailability(roomid, date);
             return Ok(result);
         }
         [HttpPost]
+        [Route("Room/AddRoom")]
         public IHttpActionResult AddRoom([FromBody] RoomModel model)
         {
             room.AddRoom(model);
             return Ok("Added Successfully");
         }
         [HttpPost]
+        [Route("Room/BookRoom")]
         public IHttpActionResult BookRoom([FromBody]BookingModel model)
         {
             room.BookRoom(model);
             return Ok("Booked Successfully");
         }
         [HttpPut]
+        [Route("Room/UpdateBookingDate")]
         public IHttpActionResult UpdateBookingDate([FromUri] int bookigid, [FromBody] BookingModel model)
         {
             room.UpdateBookingDate(bookigid,model);
             return Ok("Updated Successfully");
         }
         [HttpPut]
+        [Route("Room/UpdateBookingStatus")]
         public IHttpActionResult UpdateBookingStatus([FromUri] int bookigid, [FromBody] BookingModel model)
         {
             room.UpdateBookingStatus(bookigid, model);
             return Ok("Updated Successfully");
         }
         [HttpDelete]
+        [Route("Room/DeleteBooking")]
         public IHttpActionResult DeletBooking(int bookigid)
         {
             room.DeletBooking(bookigid);

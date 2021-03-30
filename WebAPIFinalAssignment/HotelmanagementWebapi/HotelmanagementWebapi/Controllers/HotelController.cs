@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace HotelmanagementWebapi.Controllers
 {
+    [AuthFilter]
     public class HotelController : ApiController
     {
         IHotel hotel;
