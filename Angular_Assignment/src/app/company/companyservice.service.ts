@@ -1,43 +1,71 @@
 import { Company } from './companyservice.model';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+import {Companies} from './companies'
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyserviceService {
-  private CompanyData = new BehaviorSubject<Company[]>([]);
-  Companies = this.CompanyData.asObservable();
-  private f=new BehaviorSubject<boolean>(false);
-  flag=this.f.asObservable();
 
-  constructor(private http:HttpClient) { }
+  constructor(private httpClient:HttpClient) { }
+  
+  private apiServer = "http://localhost:3000";
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
 
-  GetAllCompanies():Observable<Company[]>
-  {
-    return this.http.get<Company[]>('assets/CompanyData/Company.json').pipe(catchError(this.errorHandler));
+  create(company:any): Observable<Companies> {
+    return this.httpClient.post<Companies>(this.apiServer + '/Company', JSON.stringify(company), this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  } 
+
+  getById(id:number): Observable<Companies> {
+    return this.httpClient.get<Companies>(this.apiServer + '/companies/' + id)
+    .pipe(
+      catchError(this.errorHandler)
+    )
   }
-  CreateCompany(){
-    this.GetAllCompanies().subscribe((data)=>{
-      this.f.next(true);
-      this.CompanyData.next(data);
-    });
+
+  getAll(): Observable<Companies[]> {
+    return this.httpClient.get<Companies[]>(this.apiServer + '/Company')
+    .pipe(
+      catchError(this.errorHandler)
+    )
   }
-  AddCompany(comp:Company[]){
-    console.log("broadcast");
-    this.f.next(true);
-    this.CompanyData.next(comp);
+
+  
+  update(id:number, company:any): Observable<Companies> {
+    return this.httpClient.put<Companies>(this.apiServer + '/companies/' + id, JSON.stringify(company), this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    )
   }
-  GetAllCompany():Observable<Company[]>{
-    this.Companies=this.GetAllCompanies();
-    return this.Companies;
+
+  delete(id:number){
+    return this.httpClient.delete<Companies>(this.apiServer + '/companies/' + id, this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    )
   }
-  GetFlag():Observable<boolean>{
-    return this.flag;
+
+  errorHandler(error: any){
+    let errorMessage = '';
+    if(error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log(errorMessage);
+    return throwError(errorMessage);
   }
-  errorHandler(error:HttpErrorResponse){
-    return throwError(error.message||"Server Error");
-}
+  
 }

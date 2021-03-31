@@ -120,12 +120,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of Companies">
-                                        <td>{{item.Name}}</td>
-                                        <td>{{item.EmailId}}</td>
-                                        <td>{{item.TotalEmployee}}</td>
-                                        <td>{{item.IsCompanyActive}}</td>
-                                        <td>{{item.TotalBranch}}</td>
+                                    <tr *ngFor="let company of companies">
+                                        <td>{{company.name}}</td>
+                                        <td>{{company.email}}</td>
+                                        <td>{{company.totalEmployee}}</td>
+                                        <td>{{company.isCompanyActive}}</td>
+                                        <td>{{company.totalBranch}}</td>
+                                        <td>
+                                            <button type="button" >Update</button>
+                                            <button type="button" >Remove</button>
+                                        </td>
                                     </tr>
                                   </tbody>
                             </table>

@@ -1,6 +1,7 @@
 import { CompanyserviceService } from './../companyservice.service';
 import { Component, OnInit } from '@angular/core';
 import { Company } from '../companyservice.model';
+import { Companies } from '../companies';
 
 @Component({
   selector: 'app-list-company',
@@ -9,15 +10,16 @@ import { Company } from '../companyservice.model';
 })
 export class ListCompanyComponent implements OnInit {
 
-  constructor(private CompanyService:CompanyserviceService) { }
-  Companies:Company[]=[];
   
+  companies: Companies[] = [];
+  
+  constructor(private CompanyService:CompanyserviceService) { }
+
   ngOnInit(): void {
-    this.CompanyService.GetAllCompany().subscribe((data)=>{
-      this.Companies=data;
-      console.log("--",this.Companies);
-      
-    });
+    this.CompanyService.getAll().subscribe((data: Companies[])=>{
+      console.log(data);
+      this.companies=data;
+    })  
   }
 
 }

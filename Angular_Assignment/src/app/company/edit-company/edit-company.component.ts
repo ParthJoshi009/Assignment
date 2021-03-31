@@ -23,35 +23,11 @@ export class EditCompanyComponent implements OnInit {
 
 
   ngOnInit(): void {
-  this.Id=(this.route.snapshot.paramMap.get('id'));
-this.CompanyService.GetAllCompany().subscribe((data)=>
-{
-  this.companies=data;
-  this.CompanyService.GetFlag().subscribe((data)=>
-  {
-      this.flag=data;
-      if(this.flag==false)
-      {
-        this.CompanyService.CreateCompany();
-      }
-  });
-});
-this.company = this.companies.find(x=>x.Id==this.Id);
-console.log(this.company);
+
   }
 
   OnSubmit(){
-    console.log(this.companies);
-
-    let index=this.companies.findIndex(x=>x.Id==this.Id);
-    this.companies[index].Name=this.company.Name;
-    this.companies[index].Email=this.company.Email;
-    this.companies[index].Address=this.company.Address;
-    this.companies[index].TotalEmployee=this.company.TotalEmployee;
-    this.companies[index].IsCompanyActive=this.company.IsCompanyActive;
-    
-    this.CompanyService.AddCompany(this.companies);
-    this.router.navigate(['/ListCompany']);
+   
   }
 
 }

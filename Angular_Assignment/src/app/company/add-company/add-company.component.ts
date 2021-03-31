@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyserviceService } from '../companyservice.service';
 import { Company } from '../companyservice.model';
 import { ActivatedRoute, Router, Route } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -10,39 +11,24 @@ import { ActivatedRoute, Router, Route } from '@angular/router';
   styleUrls: ['./add-company.component.css']
 })
 export class AddCompanyComponent implements OnInit {
+  companyForm!: FormGroup;
 
-  constructor(private CompanyService:CompanyserviceService,private route:Router) { }
-
-  company:Company=new Company();
-  companies:Company[]=[];
-  flag:Boolean=false;
   ngOnInit(): void {
-    this.CompanyService.GetAllCompany().subscribe((data)=>
-    {
-      this.companies=data;
-      this.CompanyService.GetFlag().subscribe((data)=>{
-      this.flag=data;
-      if(this.flag==false){
-        this.CompanyService.CreateCompany();
-      }
-    });
-    });
-
+    this.companyForm = this.fb.group({
+      name: [''],
+      email: [''],
+      totalEmployee: [''],
+      address:[''],
+      isCompanyActive:[''],
+      totalBranch:['']
+    })
   }
-OnSubmit()
-{
-  this.company.TotalBranch=0;
-  console.log(this.company);
-  let m=0;
-  this.companies.forEach(char => {
-    if(char.Id > m)
-    {
-      m = char.Id;
+  constructor(private CompanyService:CompanyserviceService, public fb: FormBuilder,private router: Router,) { }
+    submitForm() {
+      this.CompanyService.create(this.companyForm.value).subscribe(res => {
+        console.log('Company created!')
+        this.router.navigateByUrl('/ListCompany')
+        })
+
     }
-  });
-  this.company.Id=m+1;
-  this.companies.push(this.company);
-  this.CompanyService.AddCompany(this.companies);
-  this.route.navigate(['/ListCompany']);
-}
-}
+  }
