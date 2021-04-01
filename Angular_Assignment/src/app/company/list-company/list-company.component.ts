@@ -13,7 +13,7 @@ export class ListCompanyComponent implements OnInit {
   
   companies: Companies[] = [];
   
-  constructor(private CompanyService:CompanyserviceService) { }
+  constructor(public CompanyService:CompanyserviceService) { }
 
   ngOnInit(): void {
     this.CompanyService.getAll().subscribe((data: Companies[])=>{

@@ -7,6 +7,7 @@ import { AddCompanyComponent } from './add-company/add-company.component';
 import { EditCompanyComponent } from './edit-company/edit-company.component';
 import { ViewCompanyComponent } from './view-company/view-company.component';
 import { ListCompanyComponent } from './list-company/list-company.component';
+import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 
 
 @NgModule({
@@ -16,7 +17,9 @@ import { ListCompanyComponent } from './list-company/list-company.component';
     CompanyRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgBootstrapFormValidationModule.forRoot(),
+    NgBootstrapFormValidationModule
   ]
 })
 export class CompanyModule { }

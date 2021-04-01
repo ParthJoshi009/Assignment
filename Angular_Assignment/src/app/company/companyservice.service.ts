@@ -27,7 +27,7 @@ export class CompanyserviceService {
   } 
 
   getById(id:number): Observable<Companies> {
-    return this.httpClient.get<Companies>(this.apiServer + '/companies/' + id)
+    return this.httpClient.get<Companies>(this.apiServer + '/Company/' + id)
     .pipe(
       catchError(this.errorHandler)
     )
@@ -42,7 +42,7 @@ export class CompanyserviceService {
 
   
   update(id:number, company:any): Observable<Companies> {
-    return this.httpClient.put<Companies>(this.apiServer + '/companies/' + id, JSON.stringify(company), this.httpOptions)
+    return this.httpClient.put<Companies>(this.apiServer + '/Company/' + id, JSON.stringify(company), this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )
