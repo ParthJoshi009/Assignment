@@ -6,4 +6,7 @@ export interface Companies {
     address:String;
     isCompanyActive:boolean;
     totalBranch:number;
+    branchId: number;
+    branchName: string;
+    branchaddress:string;
 }

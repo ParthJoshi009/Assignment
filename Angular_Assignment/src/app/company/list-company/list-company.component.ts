@@ -2,6 +2,7 @@ import { CompanyserviceService } from './../companyservice.service';
 import { Component, OnInit } from '@angular/core';
 import { Company } from '../companyservice.model';
 import { Companies } from '../companies';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-company',
@@ -12,14 +13,27 @@ export class ListCompanyComponent implements OnInit {
 
   
   companies: Companies[] = [];
-  
-  constructor(public CompanyService:CompanyserviceService) { }
+  id:any;  
+
+  constructor(public CompanyService:CompanyserviceService, private router:Router) { }
 
   ngOnInit(): void {
-    this.CompanyService.getAll().subscribe((data: Companies[])=>{
-      console.log(data);
-      this.companies=data;
-    })  
+   this.call()
   }
 
+    Delete(Id:number)
+    {
+      this.CompanyService.delete(Id).subscribe(res=>{
+        console.log(Id,'Company Deleted');
+        this.call()
+      })
+      
+    }
+    call()
+    {
+      this.CompanyService.getAll().subscribe((data: Companies[])=>{
+        console.log(data);
+        this.companies=data;
+      })  
+    }
 }

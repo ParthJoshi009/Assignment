@@ -62,7 +62,7 @@
                         <div class="table-responsive">
                           <div class="card card-primary">
                               <div class="card-header">
-                                <h3 class="card-title">Add Company</h3>
+                                <h3 class="card-title">Edit Company</h3>
                               </div>
                               <!-- /.card-header -->
                               <!-- form start -->
@@ -90,13 +90,18 @@
                                       <input type="checkbox" id="Active" name="Active" [(ngModel)]="companies.isCompanyActive" class="form-control">
                                     </div>
                                     <div class="form-group">
+                                        <label for="BranchName">Total Branch</label>
+                                        <input type="text" id="BranchName" name="TotalBranch" [(ngModel)]="companies.totalBranch" class="form-control">
+                                      </div>  
+                                    <div class="form-group">
                                       <label for="BranchName">Branch Name</label>
-                                      <input type="text" id="BranchName" name="BranchName" [(ngModel)]="companies.isCompanyActive"class="form-control">
+                                      <input type="text" id="BranchName" name="BranchName" [(ngModel)]="companies.branchName" class="form-control">
                                     </div>
                                     <div class="form-group">
                                       <label for="BranchAddress">Branch Address</label>
-                                      <input type="text" id="BranchAddress" name="BranchAddress" [(ngModel)]="companies.isCompanyActive" class="form-control">
+                                      <input type="text" id="BranchAddress" name="BranchAddress" [(ngModel)]="companies.branchaddress" class="form-control">
                                     </div>
+                                    
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">

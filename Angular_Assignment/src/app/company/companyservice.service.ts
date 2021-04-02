@@ -49,7 +49,7 @@ export class CompanyserviceService {
   }
 
   delete(id:number){
-    return this.httpClient.delete<Companies>(this.apiServer + '/companies/' + id, this.httpOptions)
+    return this.httpClient.delete<Companies>(this.apiServer + '/Company/' + id, this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )

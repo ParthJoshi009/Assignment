@@ -22,7 +22,7 @@ export class EditCompanyComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.CompanyService.getById(this.id).subscribe((data)=>{
       this.companies = data;
-      console.log("++",data)
+      console.log("++",this.companies)
     })
     this.companyForm = this.fb.group({
       name:this.companies.name,
@@ -30,7 +30,10 @@ export class EditCompanyComponent implements OnInit {
       totalEmployee: this.companies.totalEmployee,
       address: this.companies.address,
       isCompanyActive: this.companies.isCompanyActive,
-      totalBranch:this.companies.totalBranch
+      totalBranch:this.companies.totalBranch,
+      branchId:this.companies.branchId,
+      branchName:this.companies.branchName,
+      branchaddress:this.companies.branchaddress
     })
   }
 

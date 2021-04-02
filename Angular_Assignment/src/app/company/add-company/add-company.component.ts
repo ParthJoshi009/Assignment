@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, Route } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-add-company',
   templateUrl: './add-company.component.html',
@@ -12,7 +13,8 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 })
 export class AddCompanyComponent implements OnInit {
   companyForm!: FormGroup;
-  constructor(private CompanyService:CompanyserviceService, public fb: FormBuilder,private router: Router,) { }
+
+  constructor(private CompanyService:CompanyserviceService, public fb: FormBuilder,private router: Router) { }
 
   ngOnInit(): void {
     this.companyForm = this.fb.group({
@@ -21,14 +23,17 @@ export class AddCompanyComponent implements OnInit {
       totalEmployee: [''],
       address:[''],
       isCompanyActive:[''],
-      totalBranch:['']
+      totalBranch:[''],
+      branchId:1,
+      branchName: [''],
+      branchaddress: ['']
     })
   }
- 
     submitForm() {
       this.CompanyService.create(this.companyForm.value).subscribe(res => {
         console.log('Company created!')
         this.router.navigateByUrl('/ListCompany')
         })
     }
+    
   }
