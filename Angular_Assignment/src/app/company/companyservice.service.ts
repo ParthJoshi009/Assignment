@@ -1,9 +1,9 @@
 import { Company } from './companyservice.model';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError, from } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import {Companies} from './companies'
+import {Companies} from './companies';
 
 @Injectable({
   providedIn: 'root'

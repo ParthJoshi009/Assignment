@@ -4,6 +4,7 @@ import { CompanyserviceService } from '../companyservice.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Companies } from '../companies';
+import { LoadScript } from 'src/app/load-script';
 
 @Component({
   selector: 'app-edit-company',
@@ -16,9 +17,10 @@ export class EditCompanyComponent implements OnInit {
   company:any;
   companyForm!: FormGroup;
 
-  constructor(private CompanyService:CompanyserviceService, public fb: FormBuilder, private router:Router,private route:ActivatedRoute) { }
+  constructor(private loadscript:LoadScript,private CompanyService:CompanyserviceService, public fb: FormBuilder, private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.loadscript.run2("app-edit-company");
     this.id = this.route.snapshot.paramMap.get('id');
     this.CompanyService.getById(this.id).subscribe((data)=>{
       this.companies = data;
@@ -35,6 +37,7 @@ export class EditCompanyComponent implements OnInit {
       branchName:this.companies.branchName,
       branchaddress:this.companies.branchaddress
     })
+
   }
 
   OnSubmit(){

@@ -78,6 +78,10 @@
                         <li class="list-group-item">Branch Name:  {{companies.branchName}}</li>
                         <li class="list-group-item">Branch Address:  {{companies.branchaddress}}</li>
                     </ul>
+                    <div style="margin-top: 10px;">
+                        <button [routerLink]="['/EditCompany', companies.id]" type="submit" class="btn btn-primary">Update Company</button>
+                        <button [routerLink]="['/ListCompany']" style="margin-left: 10px;" type="submit" class="btn btn-danger">Back</button>
+                    </div>
                   </div>
               </div>
           </div>
