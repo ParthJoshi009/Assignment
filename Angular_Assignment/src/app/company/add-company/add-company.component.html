@@ -1,4 +1,3 @@
-
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
   <a class="navbar-brand" href="index.html">Company Management</a>
   <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
@@ -71,30 +70,30 @@
                                 <div class="form-group">
                                     <label for="CompanyName">Company Name</label>
                                     <input type="text" formControlName="name" id="CompanyName" name="CompanyName" class="form-control">
-                                    <span style="color: red;" *ngIf="(name.touched || name.dirty) && name.invalid">
-                                      Company Name Is Required
-                                    </span>
                                   </div>                                
                                 <div class="form-group">
                                     <label for="Email">Email Id</label>
                                     <input type="text" id="Email" name="EmailId"  formControlName="email" class="form-control">
-                                    <span style="color: red;" *ngIf="(email.touched || email.dirty) && email.invalid">
+                                    <!-- <span style="color: red;" *ngIf="(email.touched || email.dirty) && email.invalid">
                                         Email Id Is Required
                                       </span>
+                                      <span style="color: red;" *ngIf="email.touched && email.invalid">
+                                        Enter a valid Email
+                                      </span> -->
                                   </div>
                                   <div class="form-group">
                                     <label for="TotalEmployee">Total Employee</label>
                                     <input type="number" id="TotalEmployee" name="TotalEmployee" formControlName="totalEmployee" class="form-control">
-                                    <span style="color: red;" *ngIf="(totalEmployee.touched || totalEmployee.dirty) && totalEmployee.invalid">
+                                    <!-- <span style="color: red;" *ngIf="(totalEmployee.touched || totalEmployee.dirty) && totalEmployee.invalid">
                                         Total Employee Is Required
-                                      </span>
+                                      </span> -->
                                   </div>
                                   <div class="form-group">
                                     <label for="Address">Address</label>
                                     <textarea type="text" id="Address" name="Address" formControlName="address" class="form-control"></textarea>
-                                    <span style="color: red;" *ngIf="(address.touched || address.dirty) && address.invalid">
+                                    <!-- <span style="color: red;" *ngIf="(address.touched || address.dirty) && address.invalid">
                                         Address Is Required
-                                      </span>
+                                      </span> -->
                                   </div>
                                   <div class="form-group">
                                     <label for="Active">Active</label>
@@ -103,35 +102,35 @@
                                   <div class="form-group">
                                       <label for="TotalBranch">Total Branch</label>
                                       <input type="text" id="TotalBranch" name="TotalBranch" formControlName="totalBranch" class="form-control">
-                                      <span style="color: red;" *ngIf="(totalBranch.touched || totalBranch.dirty) && totalBranch.invalid">
+                                      <!-- <span style="color: red;" *ngIf="(totalBranch.touched || totalBranch.dirty) && totalBranch.invalid">
                                           Total Branch Is Required
-                                        </span>
+                                        </span> -->
                                     </div>  
                                     <div class="form-group">
                                       <label for="BranchId">Branch Id</label>
                                       <input type="text" id="BranchId" name="BranchId" formControlName="branchId" class="form-control">
-                                      <span  style="color: red;" *ngIf="(branchId.touched || branchId.dirty) && branchId.invalid">
+                                      <!-- <span  style="color: red;" *ngIf="(branchId.touched || branchId.dirty) && branchId.invalid">
                                           Branch Id Is Required
-                                        </span>
+                                        </span> -->
                                     </div>  
                                   <div class="form-group">
                                     <label for="BranchName">Branch Name</label>
-                                    <textarea  type="text" id="BranchName" name="BranchName" formControlName="branchName" class="form-control"></textarea>
-                                    <span style="color: red;" *ngIf="(branchName.touched || branchName.dirty) && branchName.invalid">
+                                    <input  type="text" id="BranchName" name="BranchName" formControlName="branchName" class="form-control">
+                                    <!-- <span style="color: red;" *ngIf="(branchName.touched || branchName.dirty) && branchName.invalid">
                                         Branch Name Is Required
-                                      </span>
+                                      </span> -->
                                   </div>
                                   <div class="form-group">
                                     <label for="BranchAddress">Branch Address</label>
-                                    <input type="text" id="BranchAddress" name="BranchAddress" formControlName="branchaddress" class="form-control">
-                                    <span style="color: red;" *ngIf="(branchaddress.touched || branchaddress.dirty) && branchaddress.invalid">
+                                    <textarea type="text" id="BranchAddress" name="BranchAddress" formControlName="branchaddress" class="form-control"></textarea>  
+                                    <!-- <span style="color: red;" *ngIf="(branchaddress.touched || branchaddress.dirty) && branchaddress.invalid">
                                         Branch Address Is Required
-                                      </span>
+                                      </span> -->
                                   </div>  
                               </div>
                               <!-- /.card-body -->
                               <div class="card-footer">
-                                <button [disabled]="!companyForm.valid" type="submit" class="btn btn-primary">Add Company</button>
+                                <button [disabled]="companyForm.invalid" type="submit" class="btn btn-primary">Add Company</button>
                               </div>
                             </form>
                           </div>

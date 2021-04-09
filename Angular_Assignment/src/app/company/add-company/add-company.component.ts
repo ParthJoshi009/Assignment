@@ -20,30 +20,30 @@ export class AddCompanyComponent implements OnInit {
   companyForm!: FormGroup;
   matcher = new ErrorStateMatcher();
   constructor(private loadscript:LoadScript,private CompanyService:CompanyserviceService, public fb: FormBuilder,private router: Router) { }
-  get name(): FormControl{
-    return this.companyForm.get('name') as FormControl;
-  }
-  get email(): FormControl{
-    return this.companyForm.get('email') as FormControl;
-  }
-  get totalEmployee(): FormControl{
-    return this.companyForm.get('totalEmployee') as FormControl;
-  }
-  get address(): FormControl{
-    return this.companyForm.get('address') as FormControl;
-  }
-  get totalBranch(): FormControl{
-    return this.companyForm.get('totalBranch') as FormControl;
-  }
-  get branchId(): FormControl{
-    return this.companyForm.get('branchId') as FormControl;
-  }
-  get branchName(): FormControl{
-    return this.companyForm.get('branchName') as FormControl;
-  }
-  get branchaddress(): FormControl{
-    return this.companyForm.get('branchaddress') as FormControl;
-  }
+  // get name(): FormControl{
+  //   return this.companyForm.get('name') as FormControl;
+  // }
+  // get email(): FormControl{
+  //   return this.companyForm.get('email') as FormControl;
+  // }
+  // get totalEmployee(): FormControl{
+  //   return this.companyForm.get('totalEmployee') as FormControl;
+  // }
+  // get address(): FormControl{
+  //   return this.companyForm.get('address') as FormControl;
+  // }
+  // get totalBranch(): FormControl{
+  //   return this.companyForm.get('totalBranch') as FormControl;
+  // }
+  // get branchId(): FormControl{
+  //   return this.companyForm.get('branchId') as FormControl;
+  // }
+  // get branchName(): FormControl{
+  //   return this.companyForm.get('branchName') as FormControl;
+  // }
+  // get branchaddress(): FormControl{
+  //   return this.companyForm.get('branchaddress') as FormControl;
+  // }
   
   // CompanyName = new FormControl('',[
   //   Validators.required,
@@ -55,7 +55,7 @@ export class AddCompanyComponent implements OnInit {
       this.loadscript.run2("app-add-company");
       this.companyForm = this.fb.group({
         name: ['',Validators.required],
-        email: ['',Validators.required,Validators.email],
+        email: ['',[Validators.email,Validators.required]],
         totalEmployee: ['',[Validators.required]],
         address:['',Validators.required],
         isCompanyActive:[''],
