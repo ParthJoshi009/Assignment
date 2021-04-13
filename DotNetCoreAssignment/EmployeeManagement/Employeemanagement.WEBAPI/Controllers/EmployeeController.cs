@@ -1,4 +1,5 @@
-﻿using Employeemanagement.DAL.Interface;
+﻿using Employeemanagement.BAL.Interface;
+using Employeemanagement.DAL.Interface;
 using Employeemanagement.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,8 +17,8 @@ namespace Employeemanagement.WEBAPI.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        IEmployee employee;
-        public EmployeeController(IEmployee iemployee)
+        IEmployeeManager employee;
+        public EmployeeController(IEmployeeManager iemployee)
         {
             employee = iemployee;
         }

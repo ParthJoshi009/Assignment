@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,7 +44,7 @@ namespace EmployeeManagement.MVC
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -55,6 +56,10 @@ namespace EmployeeManagement.MVC
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            var path = Directory.GetCurrentDirectory();
+            loggerFactory.AddFile("ErrorLog/errorlog.txt");
+
             app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -63,12 +68,6 @@ namespace EmployeeManagement.MVC
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
             app.Use(async (context, next) =>
             {
                 Stopwatch sw = new Stopwatch();
@@ -77,6 +76,13 @@ namespace EmployeeManagement.MVC
                 sw.Stop();
                 TimeSpan ts = new TimeSpan();
                 logger.LogInformation("Time :- " + ts);
+            });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

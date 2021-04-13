@@ -19,18 +19,25 @@ namespace Employeemanagement.DAL
 
         public void AddEmployee(EmployeeModel model)
         {
-            var employee = new EmployeeEntity()
+            try
             {
-                Name=model.Name,
-                Department=model.Department,
-                Salary=model.Salary,
-                IsManager=model.IsManager,
-                Manager=model.Manager,
-                Phone=model.Phone,
-                EmailId=model.EmailId
-            };
-           db.Employees.Add(employee);
-           db.SaveChanges();
+                var employee = new EmployeeEntity()
+                {
+                    Name = model.Name,
+                    Department = model.Department,
+                    Salary = model.Salary,
+                    IsManager = model.IsManager,
+                    Manager = model.Manager,
+                    Phone = model.Phone,
+                    EmailId = model.EmailId
+                };
+                db.Employees.Add(employee);
+                db.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                
+            }
         }
 
         public void DeleteEmployee(int id)
@@ -45,12 +52,14 @@ namespace Employeemanagement.DAL
 
         public EmployeeModel GetEmployeeById(int id)
         {
-           
+            try
+            {
                 var employee = db.Employees.FirstOrDefault(x => x.ID == id);
                 var result = new EmployeeModel()
                 {
+                    ID = employee.ID,
                     Name = employee.Name,
-                    Department = employee.Name,
+                    Department = employee.Department,
                     Salary = employee.Salary,
                     IsManager = employee.IsManager,
                     Manager = employee.Manager,
@@ -58,6 +67,11 @@ namespace Employeemanagement.DAL
                     EmailId = employee.EmailId
                 };
                 return result;
+            }
+            catch(Exception ex)
+            {
+                return new EmployeeModel();
+            }
         }
 
         public  List<EmployeeModel> GetEmployees()

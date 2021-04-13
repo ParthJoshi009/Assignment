@@ -19,7 +19,7 @@ namespace Employeemanagement.Model
         public decimal Salary { get; set; }
         [Required]
         public Boolean IsManager { get; set; }
-        [Required]
+        //[Required]
         public String Manager { get; set; }
         [Required]
         public String Phone { get; set; }

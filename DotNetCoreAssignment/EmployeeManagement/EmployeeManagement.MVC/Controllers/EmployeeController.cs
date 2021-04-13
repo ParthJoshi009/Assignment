@@ -8,29 +8,72 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using EmployeeManagement.MVC.Filter;
+using Microsoft.Extensions.Logging;
 
 namespace EmployeeManagement.MVC.Controllers
 {
+    [ResponseHeader]
     public class EmployeeController : Controller
     {
+        private readonly ILogger<EmployeeController> _logger;
+        public EmployeeController(ILogger<EmployeeController> logger)
+        {
+            _logger = logger;
+        }
+
         // GET: EmployeeController
         [ResponseCache(Duration = 30)]
         public async Task<IActionResult> Index()
         {
-            if(HttpContext.Session.GetString("Token") == null || HttpContext.Session.GetString("Token") == "")
+            try
             {
-                return RedirectToAction("Login", "Login");
-            }
-            using (HttpClient client=new HttpClient())
-            {
-                var tc = "Bearer " + HttpContext.Session.GetString("Token");
-                client.DefaultRequestHeaders.Add("Authorization", tc);
-                using (var response = await client.GetAsync("https://localhost:44302/api/Employee/GetEmployees"))
+                if (HttpContext.Session.GetString("Token") == null || HttpContext.Session.GetString("Token") == "")
                 {
-                    var ApiResponse = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<List<EmployeeModel>>(ApiResponse);
-                    return View(result);
+                    return RedirectToAction("Login", "Login");
                 }
+                using (HttpClient client = new HttpClient())
+                {
+                    var tc = "Bearer " + HttpContext.Session.GetString("Token");
+                    client.DefaultRequestHeaders.Add("Authorization", tc);
+                    using (var response = await client.GetAsync("https://localhost:44302/api/Employee/GetEmployees"))
+                    {
+                        var ApiResponse = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<List<EmployeeModel>>(ApiResponse);
+                        return View(result);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return RedirectToAction("Error", "Employee");
+            }
+        }
+        public async Task<ActionResult> List()
+        {
+            try
+            {
+                if (HttpContext.Session.GetString("Token") == null || HttpContext.Session.GetString("Token") == "")
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+                using (HttpClient client = new HttpClient())
+                {
+                    var tc = "Bearer " + HttpContext.Session.GetString("Token");
+                    client.DefaultRequestHeaders.Add("Authorization", tc);
+                    using (var response = await client.GetAsync("https://localhost:44302/api/Employee/GetEmployees"))
+                    {
+                        var ApiResponse = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<List<EmployeeModel>>(ApiResponse);
+                        return View(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return RedirectToAction("Error", "Employee");
             }
         }
         // GET: EmployeeController/Details/5
@@ -56,6 +99,7 @@ namespace EmployeeManagement.MVC.Controllers
             }
             catch(Exception ex)
             {
+                _logger.LogInformation(ex.Message);
                 return RedirectToAction("Error","Login");
             }
         }
@@ -86,6 +130,7 @@ namespace EmployeeManagement.MVC.Controllers
                 }
             catch(Exception ex)
             {
+                _logger.LogInformation(ex.Message);
                 return RedirectToAction("Error", "Login");
             }
            
@@ -109,40 +154,49 @@ namespace EmployeeManagement.MVC.Controllers
                     StringContent stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8,"application/json");
                     using (var response = await client.PostAsync("https://localhost:44302/api/Employee/AddEmployee",(stringContent)))
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("List");
 
                     }
                 }
             }
             catch(Exception ex)
             {
-                return Ok(ex.Message);
+                _logger.LogInformation(ex.Message);
+                return RedirectToAction("Error","Employee");
             }
         }
     
         [HttpGet,Route("Employee/Edit/{id}")]
         public async Task<ActionResult> Edit(int id)
         {
-            if (HttpContext.Session.GetString("Token") == null || HttpContext.Session.GetString("Token") == "")
+            try
             {
-                return RedirectToAction("Login", "Login");
+                if (HttpContext.Session.GetString("Token") == null || HttpContext.Session.GetString("Token") == "")
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+                using (HttpClient client = new HttpClient())
+                {
+                    var tc = "Bearer " + HttpContext.Session.GetString("Token");
+                    client.DefaultRequestHeaders.Add("Authorization", tc);
+                    using (var response = await client.GetAsync("https://localhost:44302/api/Employee/GetManagers"))
+                    {
+                        var ApiResponse = await response.Content.ReadAsStringAsync();
+                        var res = JsonConvert.DeserializeObject<List<EmployeeModel>>(ApiResponse);
+                        ViewBag.Managers = res;
+                    }
+                    using (var response = await client.GetAsync("https://localhost:44302/api/Employee/GetEmployeeByID?id=" + id))
+                    {
+                        var ApiResponse = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<EmployeeModel>(ApiResponse);
+                        return View(result);
+                    }
+                }
             }
-            using (HttpClient client=new HttpClient())
+            catch(Exception ex)
             {
-                var tc = "Bearer " + HttpContext.Session.GetString("Token");
-                client.DefaultRequestHeaders.Add("Authorization", tc);
-                using (var response = await client.GetAsync("https://localhost:44302/api/Employee/GetManagers"))
-                {
-                    var ApiResponse = await response.Content.ReadAsStringAsync();
-                    var res = JsonConvert.DeserializeObject<List<EmployeeModel>>(ApiResponse);
-                    ViewBag.Managers = res;
-                }
-                using (var response = await client.GetAsync("https://localhost:44302/api/Employee/GetEmployeeByID?id=" + id))
-                {
-                    var ApiResponse = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<EmployeeModel>(ApiResponse);
-                    return View(result);
-                }
+                _logger.LogInformation(ex.Message);
+                return RedirectToAction("Error", "Employee");
             }
         }
         // POST: EmployeeController/Edit/5
@@ -163,31 +217,40 @@ namespace EmployeeManagement.MVC.Controllers
                     StringContent stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
                     using (var response = await client.PutAsync("https://localhost:44302/api/Employee/UpdateEmployee?id=" + model.ID, stringContent))
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("List");
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                _logger.LogInformation(ex.Message);
+                return RedirectToAction("Error","Employee");
             }
         }
         
         // GET: EmployeeController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
-            if (HttpContext.Session.GetString("Token") == null || HttpContext.Session.GetString("Token") == "")
+            try
             {
-                return RedirectToAction("Login", "Login");
-            }
-            using (HttpClient client = new HttpClient())
-            {
-                var tc = "Bearer " + HttpContext.Session.GetString("Token");
-                client.DefaultRequestHeaders.Add("Authorization", tc);
-                using (var response = await client.DeleteAsync("https://localhost:44302/api/Employee/DeleteEmployee?id=" + id))
+                if (HttpContext.Session.GetString("Token") == null || HttpContext.Session.GetString("Token") == "")
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Login", "Login");
                 }
+                using (HttpClient client = new HttpClient())
+                {
+                    var tc = "Bearer " + HttpContext.Session.GetString("Token");
+                    client.DefaultRequestHeaders.Add("Authorization", tc);
+                    using (var response = await client.DeleteAsync("https://localhost:44302/api/Employee/DeleteEmployee?id=" + id))
+                    {
+                        return RedirectToAction("List");
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return RedirectToAction("Error", "Employee");
             }
         }
 
@@ -200,8 +263,9 @@ namespace EmployeeManagement.MVC.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
+                _logger.LogInformation(ex.Message);
                 return View();
             }
         }

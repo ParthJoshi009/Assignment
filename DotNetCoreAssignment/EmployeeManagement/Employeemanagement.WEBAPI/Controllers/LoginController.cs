@@ -1,4 +1,5 @@
-﻿using Employeemanagement.DAL.Interface;
+﻿using Employeemanagement.BAL.Interface;
+using Employeemanagement.DAL.Interface;
 using Employeemanagement.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -17,8 +18,8 @@ namespace Employeemanagement.WEBAPI.Controllers
     public class LoginController : ControllerBase
     {
         ILogger ilogger;
-        ILogin ilogin;
-        public LoginController(ILogin login, ILogger<LoginController> logger)
+        ILoginManager ilogin;
+        public LoginController(ILoginManager login, ILogger<LoginController> logger)
         {
             ilogin = login;
             ilogger = logger;

@@ -1,3 +1,5 @@
+using Employeemanagement.BAL;
+using Employeemanagement.BAL.Interface;
 using Employeemanagement.DAL;
 using Employeemanagement.DAL.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -32,7 +34,8 @@ namespace Employeemanagement.WEBAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           
+            UnityHelper.Configure(ref services); 
+            
             services.AddControllers();
 
             services.AddAuthentication(x =>
@@ -56,8 +59,8 @@ namespace Employeemanagement.WEBAPI
 
             services.AddDbContext<EmployeeContext>(item => item.UseSqlServer
                 (Configuration.GetConnectionString("myconn")));
-            services.AddScoped<IEmployee, Employee>();
-            services.AddScoped<ILogin, Login>();
+            services.AddScoped<IEmployeeManager, EmployeeManager>();
+            services.AddScoped<ILoginManager, LoginManager>();
             services.AddSwaggerGen();
         }
 

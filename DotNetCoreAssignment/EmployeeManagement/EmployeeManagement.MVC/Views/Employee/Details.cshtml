@@ -4,10 +4,9 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Employee Details</h1>
 
 <div>
-    <h4>EmployeeModel</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -61,6 +60,7 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    <a asp-action="Index">Back to List</a>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.ID })*@
+    <a href="@Url.Action("Edit", "Employee", new { id = Model.ID })" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+    <a asp-action="List" class="btn btn-danger"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back to List</a>
 </div>
